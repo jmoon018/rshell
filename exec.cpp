@@ -8,7 +8,7 @@
 
 using namespace std;
 
-bool printErrors = true;
+bool printErrors = false;
 
 void prnt(string s)
 {
@@ -19,33 +19,47 @@ void prnt(string s)
 // responsible for splitting up the input into words
 char** tokenize(string input)
 {
-	vector<char*>  v;
+	vector<string>  v;
 
 	int cnt = 0, wordCnt = 0;
+	string word;	
 	for(string::iterator it=input.begin(); it != input.end(); it++)// not null
 	{
-		char*  word;
-		cout << "Cnt: " << cnt << endl;
+		//cout << "Cnt: " << cnt << endl;
+		//cout << "swg" << endl;
 		if(input.at(cnt) == ' ')
 		{
 			prnt("Found a space");
-			v[wordCnt] = word;
-			wordCnt++;
+
+			v.push_back(word);	
+			word = "";
+
+			prnt("Delete worked fine");
 		}
 		else
 		{
 			prnt("Found a normal character");
-			word += input.at(cnt);
-			cout << "Word is.." << word << endl;
+
+		   word += input.at(wordCnt);	
 		}
-
-		cnt++;
+			cnt++;
+			wordCnt++;	
 	}
+	
+	v.push_back(word);
 
-	char* cArray[5] = new char[5] = {'' };
-	for(int i = 0; i < v.size(); i++)
+   int	words = v.size();
+	char** cArray = new char*[words];
+
+	for(int i = 0; i < words; i++)
 	{
-		cArray[i] = v.at(i);
+		char* curWord = new char[v.at(i).size()];
+		for(int b = 0; b < v.at(i).size(); b++)
+		{
+			curWord[b] = v.at(i).at(b);
+		}
+		cArray[i] = curWord;
+		//cout << "curword: " << v.at(i) << endl;
 	}
 
 	return cArray;
@@ -56,8 +70,8 @@ int main(int argc, char** argv)
 {
 	cout << "Initializing command prompt.." << endl;
 	string input;
-
-	while(true)
+	bool cont = true;
+	while(cont) // perpetual until a break (when last cmd is used)
 	{
 		// Print prompt
 		cout << "$ ";
@@ -65,10 +79,24 @@ int main(int argc, char** argv)
 		// Wait for input
 		std::getline (std::cin, input);
 
-		char* words[] = tokenize(input);
-		delete words[];
+		char** words = tokenize(input);
 		
+		//cout << "test..: " <<  *words << "..." << *(words+1) << endl;
+		
+		while(true) // break when we reach ;
+		{
+				int error = execvp(words[0], words);
+				if(error  == -1)
+				{
+					perror("ERROR");
+				}
+				else
+				{
 
+					cout << "swag" << endl;
+				}
+				break;
+		}	
 		break;
 	}
 	return 0;
