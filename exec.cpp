@@ -112,10 +112,14 @@ int main(int argc, char** argv)
 	//cout << "Initializing command prompt.." << endl;
 	string input;
 	bool cont = true;
+
+	char hostname[128];
+	gethostname(hostname, sizeof hostname);
 	while(cont) // perpetual until a break (when last cmd is used)
 	{
-		// Print prompt
-		cout << "$ ";
+		// get proper prompt display and show
+		cout <<  getlogin() << "@" << hostname << "$ ";
+		cout.flush();
 
 		// Wait for input
 		std::getline (std::cin, input);
@@ -124,7 +128,9 @@ int main(int argc, char** argv)
 		vector<string> words = tokenize(input);
 		//cout << "wordsCnt: " << words.size();
 		//for(int i =0; i<words.size(); i++) { cout << "w" << i << ": " << words[i] << endl; }		
-		char* list[totalWordCount+1]; // +1 for null
+		const int finalWordCount = totalWordCount+1;
+		//char* list[finalWordCount]; 
+		char **list = new char*[finalWordCount];
 		int count = 0;
 		for(int i = 0; i < totalWordCount; i++) 
 		{
@@ -157,7 +163,7 @@ int main(int argc, char** argv)
 				  }
 				  else // parent process---wait until the child is done
 				  {
-					  int x =	waitpid(-1, &status, 0);
+					  waitpid(-1, &status, 0);
 						//cout << "THE STATUS: " << status << endl;
 					  if(words[i] == "&&" && (status > 0))
 					  		break;
