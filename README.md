@@ -48,3 +48,5 @@ Afterwards, go to your terminal in Linux (alt ctrl t for ubuntu), and enter the 
     <li>The $ prompt won't display properly if the enter button is spammed, but this was reproduced in the bash terminal, too.</li>
     
 </ol>
+
+Please contact me at jmoon018@ucr.edu if you have any questions or if you find any unlisted bugs in the code. Thanks.
