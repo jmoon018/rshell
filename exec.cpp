@@ -43,22 +43,30 @@ vector<string>  tokenize(string input)
 	{
 		if(input.at(cnt) == '#')
 		{
-			v.push_back(word);
+			if(word != " " && !word.empty()) 
+			{
+				v.push_back(word);
+				
+				//cout << "daWord: " << word << endl; 
+
+			}
 			v.push_back(";");
 			word = "";
 			break;
 		}
 		else if(input.at(cnt) == ' ') // delimiter #1 - space
 		{
-			prnt("Found a space");
+			//prnt("Found a space");
 			
 			// check if this space matters at all.. eg: " echo..." should be "echo ..."
-			if(word != "" && word != " ") {
+			if(!word.empty() && word != "" && word != " ") {
 				// add the word we have and reset it
 				v.push_back(word);	
+			//	cout << "word: " << word << "." << endl;
 				word = "";
 				totalWordCount++;
 				prnt("Delete worked fine");
+
 			}
 			else { prnt("hi");  } // to stop the wordCnt++ 
 		}
@@ -76,13 +84,15 @@ vector<string>  tokenize(string input)
 			prnt("Found a normal character");
 			
 		   word += input.at(wordCnt);	
+			//cout << "kk: "  << word << endl;
 		}
 			wordCnt++;
 			cnt++;
 	}
 	
 	// add the last word (since it wasnt proccessed by the for loop above)
-	if(word != "" && word != " ") {
+	if(word != "" && word != " ")
+	{
 		v.push_back(word);
 		if(word != ";")
 		{
@@ -91,7 +101,8 @@ vector<string>  tokenize(string input)
 		totalWordCount++;
 	}
 	totalWordCount++;
-
+	
+	if(v.at(v.size()-1) != ";") { v.push_back(";"); }
 	totalWordCount = v.size();
 	return v;
 }
@@ -100,8 +111,6 @@ int main(int argc, char** argv)
 {
 	//cout << "Initializing command prompt.." << endl;
 	string input;
-	bool andContinue = true; // turns false when x is false in x && y, and will prevent y from running
-	bool orContinue = true;
 	bool cont = true;
 	while(cont) // perpetual until a break (when last cmd is used)
 	{
