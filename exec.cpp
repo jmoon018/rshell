@@ -19,7 +19,7 @@ void prnt(string s)
 }
 
 /* 
-	char** tokenize(string)
+	vector<string> tokenize(string)
 	===================================================================================
 	responsible for splitting up the input into words
 	creates a vector of strings (size of char** is undetermined until
@@ -29,12 +29,7 @@ void prnt(string s)
 		is found, it will merge the letters into a word, add it to the vector,
 		and reset the word (word = "")
 
-	when finished, a char** is made because the final size is finally known (v.size())
-		Loop through the vector and through each of its children and add its contents
-		to the new char**. 
-
-	return char** (cArray)
-	
+		
 */
 
 vector<string>  tokenize(string input)
@@ -46,7 +41,14 @@ vector<string>  tokenize(string input)
 
 	for(string::iterator it=input.begin(); it != input.end(); it++)// not null
 	{
-		if(input.at(cnt) == ' ') // delimiter #1 - space
+		if(input.at(cnt) == '#')
+		{
+			v.push_back(word);
+			v.push_back(";");
+			word = "";
+			break;
+		}
+		else if(input.at(cnt) == ' ') // delimiter #1 - space
 		{
 			prnt("Found a space");
 			
@@ -72,7 +74,7 @@ vector<string>  tokenize(string input)
 		else
 		{
 			prnt("Found a normal character");
-
+			
 		   word += input.at(wordCnt);	
 		}
 			wordCnt++;
@@ -112,7 +114,7 @@ int main(int argc, char** argv)
 		// get string, then convert it to a c* array
 		vector<string> words = tokenize(input);
 		//cout << "wordsCnt: " << words.size();
-//		for(int i =0; i<words.size(); i++) { cout << "w" << i << ": " << words[i] << endl; }		
+		//for(int i =0; i<words.size(); i++) { cout << "w" << i << ": " << words[i] << endl; }		
 		char* list[totalWordCount+1]; // +1 for null
 		int count = 0;
 		for(int i = 0; i < totalWordCount; i++) 
