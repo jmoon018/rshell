@@ -42,7 +42,7 @@ Afterwards, go to your terminal in Linux (alt ctrl t for ubuntu), and enter the 
 </p>
 
 
-<h1><a name="#bugsTag">Known Bugs/Limitations</a></h1>
+<h1><a name="bugsTag">Known Bugs/Limitations</a></h1>
 <ol>
     <li>There can't be more than one space at a time. For example: "echo  [insert whitespace]   x" is the same as "echo x"</li>
     <li>The $ prompt won't display properly if the enter button is spammed, but this was reproduced in the bash terminal, too.</li>
