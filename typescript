@@ -1,0 +1,194 @@
+Script started on Tue 21 Oct 2014 11:27:26 PM PDT
+~
+jmoon018@hammer $ .[Kcd[K[Kcs
+bash: cs: command not found
+~
+jmoon018@hammer $ ls
+[0m[01;34mDesktop[0m/  [01;34mDocuments[0m/  [01;34mDownloads[0m/  [01;32mhello.cpp[0m*  [01;32mlab1.cpp[0m*  [01;34mMusic[0m/  [01;34mPictures[0m/  [01;34mPublic[0m/  [01;34mTemplates[0m/  [01;34mVideos[0m/
+[m~
+jmoon018@hammer $ cd Documents/[K
+~/Documents
+jmoon018@hammer $ ls
+[0m[01;34mcs100gitHubStuff[0m/  [01;34mcs61[0m/  [01;34mfirstrepo[0m/
+[m~/Documents
+jmoon018@hammer $ cd cs100gitHubStuff
+~/Documents/cs100gitHubStuff
+jmoon018@hammer $ cd[K[Kls
+[0m[01;34mlab2[0m/  [01;34mucr-cs100[0m/
+[m~/Documents/cs100gitHubStuff
+jmoon018@hammer $ git ucr-cs100
+git: 'ucr-cs100' is not a git command. See 'git --help'.
+~/Documents/cs100gitHubStuff
+jmoon018@hammer $ ls[K[Kcd ucr-cs100
+~/Documents/cs100gitHubStuff/ucr-cs100
+jmoon018@hammer $ cd rshell/rshell
+~/Documents/cs100gitHubStuff/ucr-cs100/rshell/rshell
+jmoon018@hammer $ ls
+README.md  [0m[01;34mrshell[0m/
+[m~/Documents/cs100gitHubStuff/ucr-cs100/rshell/rshell
+jmoon018@hammer $ cd rshell
+~/Documents/cs100gitHubStuff/ucr-cs100/rshell/rshell/rshell
+jmoon018@hammer $ cd
+~
+jmoon018@hammer $ ls
+[0m[01;34mDesktop[0m/  [01;34mDocuments[0m/  [01;34mDownloads[0m/  [01;32mhello.cpp[0m*  [01;32mlab1.cpp[0m*  [01;34mMusic[0m/  [01;34mPictures[0m/  [01;34mPublic[0m/  [01;34mTemplates[0m/  [01;34mVideos[0m/
+[m~
+jmoon018@hammer $ cd Documents
+~/Documents
+jmoon018@hammer $ ls
+[0m[01;34mcs100gitHubStuff[0m/  [01;34mcs61[0m/  [01;34mfirstrepo[0m/
+[m~/Documents
+jmoon018@hammer $ cd cs100gitHubStuff
+~/Documents/cs100gitHubStuff
+jmoon018@hammer $ ls
+[0m[01;34mlab2[0m/  [01;34mucr-cs100[0m/
+[m~/Documents/cs100gitHubStuff
+jmoon018@hammer $ cd ucr-cs100
+~/Documents/cs100gitHubStuff/ucr-cs100
+jmoon018@hammer $ ls
+[0m[01;34massignments[0m/  GRADES.md  [01;34mlecture[0m/  LICENSE  [01;34mpeople[0m/  README.md  [01;34mrshell[0m/  [01;34mscripts[0m/  [01;34mtutorials[0m/
+[m~/Documents/cs100gitHubStuff/ucr-cs100
+jmoon018@hammer $ cd rshell
+~/Documents/cs100gitHubStuff/ucr-cs100/rshell
+jmoon018@hammer $ ls
+README.md  [0m[01;34mrshell[0m/
+[m~/Documents/cs100gitHubStuff/ucr-cs100/rshell
+jmoon018@hammer $ cd rshell
+~/Documents/cs100gitHubStuff/ucr-cs100/rshell/rshell
+jmoon018@hammer $ ls
+README.md  [0m[01;34mrshell[0m/
+[m~/Documents/cs100gitHubStuff/ucr-cs100/rshell/rshell
+jmoon018@hammer $ cd rshell
+~/Documents/cs100gitHubStuff/ucr-cs100/rshell/rshell/rshell
+jmoon018@hammer $ c[Kls
+[0m[01;32ma.out[0m*  exec.cpp  exec.script  Makefile  README.md  testfile.cpp  typescript
+[m~/Documents/cs100gitHubStuff/ucr-cs100/rshell/rshell/rshell
+jmoon018@hammer $ run[K[K[K./a.out
+jmoon018@hammer.cs.ucr.edu$ #simple stuff
+jmoon018@hammer.cs.ucr.edu$ echo hello
+hello
+jmoon018@hammer.cs.ucr.edu$ echo hello world
+hello world
+jmoon018@hammer.cs.ucr.edu$ echo hello;
+hello
+jmoon018@hammer.cs.ucr.edu$ echo hello world;
+hello world
+jmoon018@hammer.cs.ucr.edu$ echo hell    hello hello hello echo  ; 
+hello hello hello echo
+jmoon018@hammer.cs.ucr.edu$ echo hello; echo nah; echo more words; echo more; ech  o more more more more more; echo i love words;
+hello
+nah
+more words
+more
+more more more more more
+i love words
+jmoon018@hammer.cs.ucr.edu$ echo lol ol ol ol ol words words words lol ji ji ji ijj ij ij l ol ol ol ol ol ol ol ol ol ol ol lo ol ol ol ol ol olo lol ol o lo lo lo lo lo lo lol ol o l
+lol ol ol ol ol words words words lol ji ji ji ijj ij ij l ol ol ol ol ol ol ol ol ol ol ol lo ol ol ol ol ol olo lol ol o lo lo lo lo lo lo lol ol o l
+jmoon018@hammer.cs.ucr.edu$ #lets use different commands
+jmoon018@hammer.cs.ucr.edu$ ls
+a.out  exec.cpp  exec.script  Makefile	README.md  testfile.cpp  typescript
+jmoon018@hammer.cs.ucr.edu$ ls - ls    -a
+.  ..  a.out  exec.cpp	exec.script  .git  Makefile  README.md	testfile.cpp  typescript
+jmoon018@hammer.cs.ucr.edu$ pwd
+/home/csmajs/jmoon018/Documents/cs100gitHubStuff/ucr-cs100/rshell/rshell/rshell
+jmoon018@hammer.cs.ucr.edu$ touch newfile.txt
+jmoon018@hammer.cs.ucr.edu$ ls
+a.out  exec.cpp  exec.script  Makefile	newfile.txt  README.md	testfile.cpp  typescript
+jmoon018@hammer.cs.ucr.edu$ #look, the newfile.txt exists!
+jmoon018@hammer.cs.ucr.edu$ e # lets use ; connector
+jmoon018@hammer.cs.ucr.edu$ echo hello; echo world; echo .; 
+hello
+world
+.
+jmoon018@hammer.cs.ucr.edu$ echo hello world; echo my name is jamal. ; echo nice to meet you all.
+hello world
+my name is jamal
+nice to meet you all.
+jmoon018@hammer.cs.ucr.edu$ echo hello world!; lsl   ; ls -a; pwd
+hello world!
+a.out  exec.cpp  exec.script  Makefile	newfile.txt  README.md	testfile.cpp  typescript
+.  ..  a.out  exec.cpp	exec.script  .git  Makefile  newfile.txt  README.md  testfile.cpp  typescript
+/home/csmajs/jmoon018/Documents/cs100gitHubStuff/ucr-cs100/rshell/rshell/rshell
+jmoon018@hammer.cs.ucr.edu$ #easy.. now let's checkout      out the comments
+jmoon018@hammer.cs.ucr.edu$ echo hi
+hi
+jmoon018@hammer.cs.ucr.edu$ echo #hi
+
+jmoon018@hammer.cs.ucr.edu$ echo #  #hi
+
+jmoon018@hammer.cs.ucr.edu$ echo hi # hi
+hi
+jmoon018@hammer.cs.ucr.edu$ echo ol    words xxx x x # comments this wont appear anywhere oh nooooo
+words xxx x x
+jmoon018@hammer.cs.ucr.edu$ #no   lets look at cmd connectors: &&
+jmoon018@hammer.cs.ucr.edu$ l false || echo hi
+hi
+jmoon018@hammer.cs.ucr.edu$ true ||         fa  true && echo hi
+hi
+jmoon018@hammer.cs.ucr.edu$ false && echo hi
+jmoon018@hammer.cs.ucr.edu$ echo hi * && echo TRUE!
+hi
+TRUE!
+jmoon018@hammer.cs.ucr.edu$ e mkdir teemo && echo this will print
+this will print
+jmoon018@hammer.cs.ucr.edu$ mki dir teemo && thi   echo this wont print
+mkdir: cannot create directory `teemo': File exists
+jmoon018@hammer.cs.ucr.edu$ f true && echo more stuff; fals    echo lllll     hi world && e ls;   
+more stuff
+hi world
+a.out  exec.cpp  exec.script  Makefile	newfile.txt  README.md	teemo  testfile.cpp  typescript
+jmoon018@hammer.cs.ucr.edu$ # || operator
+jmoon018@hammer.cs.ucr.edu$ false || echo n i like my mouse
+i like my mouse
+jmoon018@hammer.cs.ucr.edu$ true || echo this wont print!
+jmoon018@hammer.cs.ucr.edu$ echo this will print! || echo this wont print!
+this will print!
+jmoon018@hammer.cs.ucr.edu$ mkdir teemo || echo another print!
+mkdir: cannot create directory `teemo': File exists
+another print!
+jmoon018@hammer.cs.ucr.edu$ echo print || echo print || echo print
+print
+jmoon018@hammer.cs.ucr.edu$ echo stuff || echo nah; echo words            mkd   false || echo i like music
+stuff
+jmoon018@hammer.cs.ucr.edu$ e echo words && echo hi || echo this shouldnt print
+words
+hi
+jmoon018@hammer.cs.ucr.edu$ echo w this && echo will && echo all ||  && echo print
+this
+will
+all
+print
+jmoon018@hammer.cs.ucr.edu$ echo stuff ||  &            echo wor        ls || echo words && echo hi
+a.out  exec.cpp  exec.script  Makefile	newfile.txt  README.md	teemo  testfile.cpp  typescript
+jmoon018@hammer.cs.ucr.edu$ #lets do some weird stuff
+jmoon018@hammer.cs.ucr.edu$ ./a.out
+jmoon018@hammer.cs.ucr.edu$ echo hello
+hello
+jmoon018@hammer.cs.ucr.edu$ exit
+jmoon018@hammer.cs.ucr.edu$ echo hello
+hello
+jmoon018@hammer.cs.ucr.edu$ echo exit         # lets try to throw t it off f
+jmoon018@hammer.cs.ucr.edu$ echo exit
+exit
+jmoon018@hammer.cs.ucr.edu$ ex cho exit exit exit **  &&&  ls
+exit exit exit
+a.out  exec.cpp  exec.script  Makefile	newfile.txt  README.md	teemo  testfile.cpp  typescript
+jmoon018@hammer.cs.ucr.edu$ rm newfile.txt
+jmoon018@hammer.cs.ucr.edu$ ls
+a.out  exec.cpp  exec.script  Makefile	README.md  teemo  testfile.cpp	typescript
+jmoon018@hammer.cs.ucr.edu$ # newfile.txt is gone!
+jmoon018@hammer.cs.ucr.edu$ #o  ok now i leave                ;;;;;
+jmoon018@hammer.cs.ucr.edu$ ;;;;;|||
+ERROR: EXECUTING THE CMD FAILED
+: No such file or directory
+jmoon018@hammer.cs.ucr.edu$ &&&&
+ERROR: EXECUTING THE CMD FAILED
+: No such file or directory
+jmoon018@hammer.cs.ucr.edu$ # prints errors appropriately
+jmoon018@hammer.cs.ucr.edu$ # ith   i think thats all.. exiting
+jmoon018@hammer.cs.ucr.edu$ exit
+~/Documents/cs100gitHubStuff/ucr-cs100/rshell/rshell/rshell
+jmoon018@hammer $ exit
+exit
+
+Script done on Tue 21 Oct 2014 11:39:21 PM PDT
