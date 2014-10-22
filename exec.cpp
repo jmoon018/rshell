@@ -1,3 +1,5 @@
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <vector>
 #include <stdio.h>
 #include <unistd.h>
@@ -34,67 +36,6 @@ void prnt(string s)
 	return char** (cArray)
 	
 */
-/*
-char**  tokenize(string input)
-{
-	vector<string>  v; // contains all the words delimited by spaces and ;
-
-	int cnt = 0, wordCnt = 0; // cnt=index in input string, wordCnt = current word length
-	string word; // add letters from input to this string, then add it to vector when delim. found	
-
-	for(string::iterator it=input.begin(); it != input.end(); it++)// not null
-	{
-		if(input.at(cnt) == ' ') // delimiter #1 - space
-		{
-			prnt("Found a space");
-			
-			// add the word we have and reset it
-			v.push_back(word);	
-			word = "";
-
-			prnt("Delete worked fine");
-		}
-		else if(input.at(cnt) == ';') // delimiter #2 - semicolon
-		{
-			v.push_back(word); // push back w/e word we have
-			v.push_back(";"); // then add a semicolon [as a new 'word' or element in the vector]
-			word = ""; // reset word
-		}
-		else
-		{
-			prnt("Found a normal character");
-
-		   word += input.at(wordCnt);	
-		}
-			cnt++;
-			wordCnt++;	
-	}
-	
-	// add the last word (since it wasnt proccessed by the for loop above)
-	v.push_back(word);
-
-	// create char** and copy elements into it
-   int	words = v.size();
-	totalWordCount = words;
-	char** cArray = new char*[words];
-
-	for(int i = 0; i < words; i++)
-	{
-		char* curWord = new char[v.at(i).size()];
-		for(int b = 0; b < v.at(i).size(); b++)
-		{
-			curWord[b] = v.at(i).at(b);
-		}
-
-
-		cArray[i] = curWord;
-		//cout << "curword: " << v.at(i) << endl;
-	}
-
-	return cArray;
-}
-
-*/
 
 vector<string>  tokenize(string input)
 {
@@ -109,18 +50,24 @@ vector<string>  tokenize(string input)
 		{
 			prnt("Found a space");
 			
-			// add the word we have and reset it
-			v.push_back(word);	
-			word = "";
-			totalWordCount++;
-			prnt("Delete worked fine");
+			// check if this space matters at all.. eg: " echo..." should be "echo ..."
+			if(word != "" && word != " ") {
+				// add the word we have and reset it
+				v.push_back(word);	
+				word = "";
+				totalWordCount++;
+				prnt("Delete worked fine");
+			}
+			else { prnt("hi");  } // to stop the wordCnt++ 
 		}
 		else if(input.at(cnt) == ';') // delimiter #2 - semicolon
 		{
-			v.push_back(word); // push back w/e word we have
+			if(word != "" && word != " ") {
+				v.push_back(word); // push back w/e word we have
+				totalWordCount++;
+			}
 			v.push_back(";"); // then add a semicolon [as a new 'word' or element in the vector]
 			word = ""; // reset word
-			totalWordCount+= 2;
 		}
 		else
 		{
@@ -128,22 +75,31 @@ vector<string>  tokenize(string input)
 
 		   word += input.at(wordCnt);	
 		}
+			wordCnt++;
 			cnt++;
-			wordCnt++;	
 	}
 	
 	// add the last word (since it wasnt proccessed by the for loop above)
-	v.push_back(word);
+	if(word != "" && word != " ") {
+		v.push_back(word);
+		if(word != ";")
+		{
+			v.push_back(";");
+		}	
+		totalWordCount++;
+	}
 	totalWordCount++;
 
+	totalWordCount = v.size();
 	return v;
 }
 
-
 int main(int argc, char** argv)
 {
-	cout << "Initializing command prompt.." << endl;
+	//cout << "Initializing command prompt.." << endl;
 	string input;
+	bool andContinue = true; // turns false when x is false in x && y, and will prevent y from running
+	bool orContinue = true;
 	bool cont = true;
 	while(cont) // perpetual until a break (when last cmd is used)
 	{
@@ -153,38 +109,78 @@ int main(int argc, char** argv)
 		// Wait for input
 		std::getline (std::cin, input);
 
+		// get string, then convert it to a c* array
 		vector<string> words = tokenize(input);
-		
-		//for(int i = 0; i < totalWordCount; i++) { cout << words[i]  << " " << endl; }
-
-		//cout << "wordcnt: " << totalWordCount << endl;
-		char* h[totalWordCount];
+		//cout << "wordsCnt: " << words.size();
+//		for(int i =0; i<words.size(); i++) { cout << "w" << i << ": " << words[i] << endl; }		
+		char* list[totalWordCount+1]; // +1 for null
+		int count = 0;
 		for(int i = 0; i < totalWordCount; i++) 
 		{
-			h[i] = new char[words[i].size()+1];
-			copy(words[i].begin(), words[i].end(), h[i]);
-			h[i][words[i].size()] = '\0';
-		} 
+			//cout << "TWC " << totalWordCount << "..i=" << i << endl; 
+			if((words[i] == ";") || words[i] == "||" || (words[i] == "&&"))
+			{
+				  // execute the command
+				  pid_t pid;
+				  int status = 0;
+				  pid = fork();
 
-		h[totalWordCount] = NULL;
-		while(true) // break when we reach ;
-		{
-				cout << "swag" << endl;
-				int error = execvp(h[0], h);
-				if(error  == -1)
+				  if(pid <= -1) // something went wrong 
+				  {
+					  perror("ERROR [FORK]: CHILD FAILED\n");
+					  exit(1); // quit the program
+				  }
+				  else if(pid == 0) // child process
+				  {
+					  //for(int n = 0; n < 5; n++) { cout << "k: " << list[n] << endl; }
+					  //list[0] = "echo"; list[1] = "hi";  list[2] = NULL;
+					  list[count] = NULL;
+					  int success = execvp(list[0], list);
+					  if(success <= -1) // nope, it failed
+					  {	
+						  perror("ERROR: EXECUTING THE CMD FAILED\n");
+						  exit(1); // dip
+					  }
+					  else { cout  << "It succeeded..." << success << endl; }
+					  
+				  }
+				  else // parent process---wait until the child is done
+				  {
+					  int x =	waitpid(-1, &status, 0);
+						//cout << "THE STATUS: " << status << endl;
+					  if(words[i] == "&&" && (status > 0))
+					  		break;
+
+						if(words[i] == "||" && (status <= 0))
+							break;
+				  }
+
+					// reset the list
+					for(int j = 0; j < count; j++) { 
+						list[j] = NULL;
+					}	
+				   count = 0;
+			}	
+			else {
+				//cout << "Adding word" << endl;
+				if(count == 0 && words[i] == "exit")
 				{
-					perror("ERROR");
 					exit(1);
 				}
-				else
-				{
+				list[count] = new char[words[i].size()+1];
+				copy(words[i].begin(), words[i].end(), list[count]);
+				list[count][words[i].size()] = '\0';
 
-					cout << "swag" << endl;
-				}
-				break;
-		}	
-		delete [] h; // free mem
-		break;
+				//cout << "..." << list[count] << endl;
+				count++;
+			}
+		} 
+
+		//list[totalWordCount] = NULL;
+		totalWordCount = 0;			
 	}
 	return 0;
 }
+// run rshell within rshell
+// run it on local files
+// LOOK INTO WAIT 
